@@ -1,0 +1,108 @@
+			  Z80 ASSEMBLER - ZASM VER 1.6
+                      	; LEDを右回りに点滅
+  8000                	        ORG     8000H   
+                      	
+  83F8                	LED1		EQU		83F8H
+  83F9                	LED2		EQU		83F9H
+  83FA                	LED3		EQU		83FAH
+  83FB                	LED4		EQU		83FBH
+  83FC                	LED5		EQU		83FCH
+  83FD                	LED6		EQU		83FDH
+  83FE                	LED7		EQU		83FEH
+  83FF                	LED8		EQU		83FFH
+  0223                	KEYSCAN		EQU		0223H
+                      	
+  0030                	WAIT1   EQU     30H
+  0020                	WAIT2   EQU     20H
+                      	
+  8000  CDA680        	START:	CALL	TIMER
+  8003  21F883        		LD      HL,LED1
+  8006  3601          	        LD      (HL),01H
+  8008  CDA680        		CALL	TIMER   
+  800B  21F983        		LD      HL,LED2
+  800E  3601          	        LD      (HL),01H
+  8010  CDA680        	        CALL    TIMER   
+  8013  21FA83        		LD      HL,LED3
+  8016  3601          	        LD      (HL),01H
+  8018  CDA680        	        CALL    TIMER   
+  801B  21FB83        		LD      HL,LED4
+  801E  3601          	        LD      (HL),01H
+  8020  CDA680        	        CALL    TIMER   
+  8023  21FC83        		LD      HL,LED5
+  8026  3601          	        LD      (HL),01H
+  8028  CDA680        	        CALL    TIMER   
+  802B  21FD83        		LD      HL,LED6
+  802E  3601          	        LD      (HL),01H
+  8030  CDA680        	        CALL    TIMER   
+  8033  21FE83        		LD      HL,LED7
+  8036  3601          	        LD      (HL),01H
+  8038  CDA680        	        CALL    TIMER   
+  803B  21FF83        		LD      HL,LED8
+  803E  3601          	        LD      (HL),01H
+  8040  CDA680        	        CALL    TIMER   
+  8043  21FF83        		LD      HL,LED8
+  8046  3602          	        LD      (HL),02H
+  8048  CDA680        	        CALL    TIMER   
+  804B  21FF83        		LD      HL,LED8
+  804E  3604          	        LD      (HL),04H
+  8050  CDA680        	        CALL    TIMER   
+  8053  21FF83        		LD      HL,LED8
+  8056  3608          	        LD      (HL),08H
+  8058  CDA680        	        CALL    TIMER   
+  805B  21FE83        		LD      HL,LED7
+  805E  3608          	        LD      (HL),08H
+  8060  CDA680        	        CALL    TIMER   
+  8063  21FD83        		LD      HL,LED6
+  8066  3608          	        LD      (HL),08H
+  8068  CDA680        	        CALL    TIMER   
+  806B  21FC83        		LD      HL,LED5
+  806E  3608          	        LD      (HL),08H
+  8070  CDA680        	        CALL    TIMER   
+  8073  21FB83        		LD      HL,LED4
+  8076  3608          	        LD      (HL),08H
+  8078  CDA680        	        CALL    TIMER   
+  807B  21FA83        		LD      HL,LED3
+  807E  3608          	        LD      (HL),08H
+  8080  CDA680        	        CALL    TIMER   
+  8083  21F983        		LD      HL,LED2
+  8086  3608          	        LD      (HL),08H
+  8088  CDA680        	        CALL    TIMER   
+  808B  21F883        		LD      HL,LED1
+  808E  3608          	        LD      (HL),08H
+  8090  CDA680        	        CALL    TIMER   
+  8093  21F883        		LD      HL,LED1
+  8096  3610          	        LD      (HL),10H
+  8098  CDA680        	        CALL    TIMER   
+  809B  21F883        		LD      HL,LED1
+  809E  3620          	        LD      (HL),20H
+  80A0  CDA680        	        CALL    TIMER   
+  80A3  C30080        		JP	START
+                      	
+  80A6  3E0A          	TIMER:	LD      A,0AH
+  80A8  1630          	LOP1:   LD      D,WAIT1
+  80AA  1E20          	LOP2:   LD      E,WAIT2
+  80AC  1D            	LOP3:   DEC     E       
+  80AD  C2AC80        	        JP      NZ,LOP3    
+  80B0  15            	        DEC     D       
+  80B1  C2AA80        	        JP      NZ,LOP2    
+  80B4  3D            	        DEC     A       
+  80B5  C2A880        	        JP      NZ,LOP1    
+  80B8  21F883        	        LD      HL,LED1
+  80BB  3600          	        LD      (HL),00H
+  80BD  23            	        INC     HL      
+  80BE  3600          	        LD      (HL),00H
+  80C0  23            	        INC     HL      
+  80C1  3600          	        LD      (HL),00H
+  80C3  23            	        INC     HL      
+  80C4  3600          	        LD      (HL),00H
+  80C6  23            	        INC     HL      
+  80C7  3600          	        LD      (HL),00H
+  80C9  23            	        INC     HL      
+  80CA  3600          	        LD      (HL),00H
+  80CC  23            	        INC     HL      
+  80CD  3600          	        LD      (HL),00H
+  80CF  23            	        INC     HL      
+  80D0  3600          	        LD      (HL),00H
+  80D2  C9            	        RET
+  80D3                	END
+
