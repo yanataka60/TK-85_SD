@@ -2,7 +2,7 @@
   83EC                	LEDREG		EQU		83ECH      ;TK85 MONITOR
   01A1                	RGDSP		EQU		01A1H      ;TK85 MONITOR
   007C                	MONST		EQU		007CH      ;TK85 MONITOR
-  7C39                	MIN			EQU		7C39H      ;TK85 WORK -(83C7H)
+  7C6F                	MIN			EQU		7C6FH      ;TK85 WORK -(8391H)
   7C00                	MAX			EQU		7C00H      ;TK85 WORK -(83FFH+1)
                       	
   83E6                	FNAME		EQU		83E6H      ;DEレジスタセーブエリアを流用
@@ -72,16 +72,16 @@
                       	;FNAME <- 0000H～FFFFHを入力。
                       	;         ファイルネームは「xxxx.BTK」となる。
                       	;SADRS <- 保存開始アドレス(8000H固定)
-                      	;EADRS <- 保存終了アドレス(83C6H固定)
+                      	;EADRS <- 保存終了アドレス(8390H固定)
                       	
   0462  21E883        	SDSAVE:	LD		HL,SADRS
   0465  3600          			LD		(HL),00H
   0467  23            			INC		HL
   0468  3680          			LD		(HL),80H   ;SADRS <- 8000H
   046A  23            			INC		HL         ;HL <- EADRS
-  046B  36C6          			LD		(HL),0C6H
+  046B  3690          			LD		(HL),090H
   046D  23            			INC		HL
-  046E  3683          			LD		(HL),083H  ;EADRS <- 83C6H
+  046E  3683          			LD		(HL),083H  ;EADRS <- 8390H
   0470  CD6A07        			CALL	INIT
   0473                	SDSAVE2:
   0473  3E80          			LD		A,80H
@@ -313,11 +313,11 @@
   074C  C9            			RET
                       	
                       	;WORKエリアを識別
-                      	;83C7H～83FFHはLOADをSKIP
+                      	;8391H～83FFHはLOADをSKIP
   074D  E5            	JOGAI:		PUSH	HL
   074E  D5            				PUSH	DE
   074F  EB            				EX		DE,HL
-  0750  21397C        	JOGAI_TK:	LD		HL,MIN
+  0750  216F7C        	JOGAI_TK:	LD		HL,MIN
   0753  19            				ADD		HL,DE
   0754  D25E07        				JP		NC,JGOK    ;MIN未満ならOK
   0757  21007C        				LD		HL,MAX

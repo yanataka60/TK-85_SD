@@ -1,7 +1,7 @@
 LEDREG		EQU		83ECH      ;TK85 MONITOR
 RGDSP		EQU		01A1H      ;TK85 MONITOR
 MONST		EQU		007CH      ;TK85 MONITOR
-MIN			EQU		7C39H      ;TK85 WORK -(83C7H)
+MIN			EQU		7C6FH      ;TK85 WORK -(8391H)
 MAX			EQU		7C00H      ;TK85 WORK -(83FFH+1)
 
 FNAME		EQU		83E6H      ;DEレジスタセーブエリアを流用
@@ -71,16 +71,16 @@ TKMD5:	LD		A,(DE)     ;FNAME取得
 ;FNAME <- 0000H～FFFFHを入力。
 ;         ファイルネームは「xxxx.BTK」となる。
 ;SADRS <- 保存開始アドレス(8000H固定)
-;EADRS <- 保存終了アドレス(83C6H固定)
+;EADRS <- 保存終了アドレス(8390H固定)
 
 SDSAVE:	LD		HL,SADRS
 		LD		(HL),00H
 		INC		HL
 		LD		(HL),80H   ;SADRS <- 8000H
 		INC		HL         ;HL <- EADRS
-		LD		(HL),0C6H
+		LD		(HL),090H
 		INC		HL
-		LD		(HL),083H  ;EADRS <- 83C6H
+		LD		(HL),083H  ;EADRS <- 8390H
 		CALL	INIT
 SDSAVE2:
 		LD		A,80H
@@ -312,7 +312,7 @@ F2CHK:	IN		A,(0F9H)
 		RET
 
 ;WORKエリアを識別
-;83C7H～83FFHはLOADをSKIP
+;8391H～83FFHはLOADをSKIP
 JOGAI:		PUSH	HL
 			PUSH	DE
 			EX		DE,HL
